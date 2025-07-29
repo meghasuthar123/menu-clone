@@ -1,0 +1,686 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bhookie Cart</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Montserrat', sans-serif;
+      background-color: #121212;
+      color: #fff;
+    }
+
+    header {
+      background-color: #1b1b1b;
+      padding: 20px;
+      border-bottom: 2px solid #ff6600;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+
+    .back-to-menu {
+      background-color: #ff6600;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
+      margin-top: 100px;
+    }
+
+    .main {
+      flex: 2;
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+    }
+
+    .sidebar {
+      flex: 1;
+      min-width: 300px;
+      background-color: #1e1e1e;
+      padding: 20px;
+      border-radius: 8px;
+      height:max-content;
+    }
+
+   .order-type-group {
+  display: flex;
+  gap: 10px;
+}
+
+.order-type-btn {
+  flex: 1;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: bold;
+  border-radius: 6px;
+  transition: 0.2s;
+  white-space: nowrap;
+}
+
+
+
+    h2, h3 {
+      margin-top: 0;
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #333;
+      padding: 15px 0;
+    }
+
+    .item img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 1px solid #ff6600;
+      margin-right: 15px;
+    }
+
+    .item-info {
+      flex: 1;
+    }
+
+    .qty-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+      justify-content: center; 
+    }
+
+    .qty-controls button {
+      background: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+
+    .addons {
+      display: flex;
+      gap: 15px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .addon-card {
+  background-color: #2a2a2a;
+  border: 1px solid #ff6600;
+  border-radius: 8px;
+  padding: 10px;
+  width: 140px;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: auto;
+}
+
+
+    .addon-card img {
+      width: 100%;
+      height: 70px;
+      object-fit: cover;
+      border-radius: 6px;
+    }
+
+    .addon-name {
+      font-weight: bold;
+      margin: 5px 0 2px;
+    }
+
+    .addon-price {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .btn {
+      background: #ff6600;
+      color: white;
+      border: none;
+      padding: 8px;
+      width: 100%;
+      border-radius: 4px;
+      font-weight: bold;
+      margin-top: 5px;
+      cursor: pointer;
+    }
+
+    .card {
+      background: #2b2b2b;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .label {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .price-row {
+      display: flex;
+      justify-content: space-between;
+      margin: 8px 0;
+    }
+
+    .total {
+      border-top: 1px solid #444;
+      padding-top: 10px;
+      font-weight: bold;
+    }
+
+    .place-order-btn {
+      width: 100%;
+      padding: 12px;
+      background-color: #ff6600;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    #customizeModal {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #121212;
+  padding: 20px 20px 30px;
+  border: 2px solid #ff6600;
+  border-radius: 12px;
+  z-index: 3000;
+  width: 90%;
+  max-width: 600px;
+  color: #fff;
+  position: fixed;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: transparent;
+  color: #ff6600;
+  font-size: 27px;
+  border: none;
+  cursor: pointer;
+  line-height: 1;
+}
+.close-btn:hover {
+  color: #fff;
+}
+
+
+    @media screen and (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html">
+    <img id="navLogo" src="images/logo.png" alt="Bhookie Logo" height="60" />
+  </a>
+  <a class="back-to-menu" href="menu.html" onclick="localStorage.removeItem('orderLocation'); localStorage.removeItem('orderType');">Back to Menu</a>
+</header>
+
+<div class="container">
+  <div class="main">
+    <h2 id="itemCount">Items selected</h2>
+    <div id="cart"></div>
+    <br><br>
+    <h3>Complete your meal</h3>
+    <div class="addons">
+      <div class="addon-card">
+        <img src="images/classicfries(R).png" alt="Classic Fries">
+        <p class="addon-name">Classic Fries</p>
+        <p class="addon-price">£1.99</p>
+        <button class="btn">ADD</button>
+      </div>
+      <div class="addon-card">
+        <img src="images/sodacans-model.png" alt="Drinks">
+        <p class="addon-name">Soda Cans</p>
+        <p class="addon-price">£1.49</p>
+        <button class="btn">ADD</button>
+      </div>
+       <div class="addon-card">
+        <img src="images/mayo.png" alt="Mayo">
+        <p class="addon-name">Mayo</p>
+        <p class="addon-price">£0.50</p>
+        <button class="btn">ADD</button>
+      </div>
+      <div class="addon-card">
+        <img src="images/bites.png" alt="Chicken bites">
+        <p class="addon-name">Chicken Bites</p>
+        <p class="addon-price">£3.99</p>
+        <button class="btn">ADD</button>
+      </div>
+      <div class="addon-card">
+        <img src="images/chaichai.png" alt="Chai">
+        <p class="addon-name">Chai</p>
+        <p class="addon-price">£1.99</p>
+        <button class="btn">ADD</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Customize Modal -->
+<div id="customizeModal">
+  <button class="close-btn" onclick="closeModal()">×</button>
+  <h3 style="color: #ff6600;">Customise as per your choice </h3>
+
+  <h4>Sauces</h4>
+  <div class="addons">
+    <div class="addon-card">
+      <img src="images/mayo.png" alt="Mayo">
+      <p class="addon-name">Mayo</p>
+      <p class="addon-price">£2</p>
+      <div class="qty-controls">
+        <button onclick="adjustCustomizationQty('mayo', -1)">-</button>
+        <span id="qty-mayo">01</span>
+        <button onclick="adjustCustomizationQty('mayo', 1)">+</button>
+      </div>
+    </div>
+
+    <div class="addon-card">
+      <img src="images/mayo.png" alt="Green Chilli">
+      <p class="addon-name">Green chilli sauce</p>
+      <p class="addon-price">£2</p>
+      <div class="qty-controls">
+        <button onclick="adjustCustomizationQty('green', -1)">-</button>
+        <span id="qty-green">01</span>
+        <button onclick="adjustCustomizationQty('green', 1)">+</button>
+      </div>
+    </div>
+
+    <div class="addon-card">
+      <img src="images/mayo.png" alt="BBQ">
+      <p class="addon-name">BBQ sauce</p>
+      <p class="addon-price">£2</p>
+      <div class="qty-controls">
+        <button onclick="adjustCustomizationQty('bbq', -1)">-</button>
+        <span id="qty-bbq">01</span>
+        <button onclick="adjustCustomizationQty('bbq', 1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <h4 style="margin-top: 20px;">Add ons</h4>
+  <div class="addons">
+    <div class="addon-card">
+      <img src="images/cheese.png" alt="Cheese">
+      <p class="addon-name">Cheese</p>
+      <p class="addon-price">£2</p>
+      <div class="qty-controls">
+        <button onclick="adjustCustomizationQty('cheese', -1)">-</button>
+        <span id="qty-cheese">01</span>
+        <button onclick="adjustCustomizationQty('cheese', 1)">+</button>
+      </div>
+    </div>
+
+    <div class="addon-card">
+      <img src="images/lettuce.png" alt="lettuce">
+      <p class="addon-name">Lettuce</p>
+      <p class="addon-price">£2</p>
+      <div class="qty-controls">
+        <button onclick="adjustCustomizationQty('lettuce', -1)">-</button>
+        <span id="qty-lettuce">01</span>
+        <button onclick="adjustCustomizationQty('lettuce', 1)">+</button>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <button class="btn" onclick="closeModal()">Save & Close</button>
+</div>
+
+
+  <div class="sidebar">
+  <!--<div class="card">
+  <p class="label">Select Location</p>
+  <div class="card-row order-type-group">
+    <button class="btn order-type-btn" id="location-restaurant">Bold Street</button>
+    <button class="btn order-type-btn" id="location-cart">Liverpool One</button>
+  </div>
+
+  <div id="restaurantOptions" style="margin-top: 10px; display: none;">
+    <p style="font-size: 13px; margin-bottom: 5px;">Select Order Type:</p>
+    <div class="card-row order-type-group">
+      <button class="btn order-type-btn" id="dinein-btn">Dine In</button>
+      <button class="btn order-type-btn" id="takeaway-btn">Takeaway</button>
+    </div>
+  </div>
+
+  <p id="orderTypeStatus" style="font-size: 12px; color: #aaa; margin-top: 10px;"></p>
+  </div>-->
+
+
+    <div class="card">
+      <p class="label">Select offer / Apply coupon</p>
+      <p style="font-size: 12px; color: #aaa;">Get discount with your order</p>
+    </div>
+
+   <div class="card">
+  <div class="price-row"><span>Discount</span><span id="discount">-£0.00</span></div>
+  <div class="price-row"><span>Sub Total</span><span id="subTotal">£0.00</span></div>
+  <div class="price-row"><span>Taxes and Charges</span><span id="taxes">£0.00</span></div>
+  <div class="price-row total"><span>Grand Total</span><span id="grandTotal">£0.00</span></div>
+  <button class="place-order-btn">PLACE ORDER</button>
+</div>
+
+  </div>
+</div>
+
+
+<script>
+function updateLocationSelection() {
+  const selectedLocation = localStorage.getItem('orderLocation');
+  const orderType = localStorage.getItem('orderType');
+  const status = document.getElementById("orderTypeStatus");
+  const restaurantOptions = document.getElementById("restaurantOptions");
+
+  restaurantOptions.style.display = "none";
+  status.textContent = "";
+
+  document.querySelectorAll("#location-restaurant, #location-cart").forEach(btn => {
+    if (btn.id === "location-" + selectedLocation) {
+      btn.style.backgroundColor = "#fff";
+      btn.style.color = "#121212";
+    } else {
+      btn.style.backgroundColor = "#ff6600";
+      btn.style.color = "#fff";
+    }
+  });
+
+  if (selectedLocation === "cart") {
+    localStorage.setItem('orderType', 'takeaway');
+    restaurantOptions.style.display = "none";
+    status.textContent = "You selected: Cart (Takeaway)";
+  } else if (selectedLocation === "restaurant") {
+    if (orderType === "dinein" || orderType === "takeaway") {
+      restaurantOptions.style.display = "block";
+      status.textContent = `You selected: Restaurant (${orderType === "dinein" ? "Dine In" : "Takeaway"})`;
+    } else {
+      restaurantOptions.style.display = "block"; // show it so user can choose
+      status.textContent = "You selected: Restaurant (Please choose Dine In or Takeaway)";
+    }
+  }
+
+  if (restaurantOptions.style.display === "block") {
+    document.querySelectorAll("#restaurantOptions .order-type-btn").forEach(btn => {
+      if (btn.id === orderType + "-btn") {
+        btn.style.backgroundColor = "#fff";
+        btn.style.color = "#121212";
+      } else {
+        btn.style.backgroundColor = "#ff6600";
+        btn.style.color = "#fff";
+      }
+    });
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  updateLocationSelection();
+
+  document.getElementById("location-restaurant").addEventListener("click", () => {
+    localStorage.setItem("orderLocation", "restaurant");
+    localStorage.removeItem("orderType"); // Reset orderType so user can choose fresh
+    updateLocationSelection();
+  });
+
+  document.getElementById("location-cart").addEventListener("click", () => {
+    localStorage.setItem("orderLocation", "cart");
+    localStorage.setItem("orderType", "takeaway");
+    updateLocationSelection();
+  });
+
+  document.getElementById("dinein-btn").addEventListener("click", () => {
+    localStorage.setItem("orderType", "dinein");
+    updateLocationSelection();
+  });
+
+  document.getElementById("takeaway-btn").addEventListener("click", () => {
+    localStorage.setItem("orderType", "takeaway");
+    updateLocationSelection();
+  });
+});
+
+// Addon logic & customization
+const quantities = {
+  mayo: 0,
+  green: 0,
+  bbq: 0,
+  cheese: 0,
+  lettuce: 0,
+};
+
+let cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+let customizingIndex = null;
+
+function customizeItem(index) {
+  customizingIndex = index;
+  const existingCustoms = cartItems[index].customizations || {};
+  for (let key in quantities) {
+    quantities[key] = existingCustoms[key] || 0;
+    document.getElementById(`qty-${key}`).textContent = quantities[key].toString().padStart(2, '0');
+  }
+  document.getElementById("customizeModal").style.display = "block";
+}
+
+function closeModal() {
+  if (customizingIndex !== null) {
+    const customizationPrices = {
+      mayo: 2,
+      green: 2,
+      bbq: 2,
+      cheese: 2,
+      lettuce: 2
+    };
+
+    const selectedAddOns = {};
+    let customTotal = 0;
+
+    for (let key in quantities) {
+      const qty = quantities[key];
+      if (qty > 0) {
+        selectedAddOns[key] = qty;
+        customTotal += qty * customizationPrices[key];
+      }
+    }
+
+    cartItems[customizingIndex].customizations = selectedAddOns;
+    cartItems[customizingIndex].customPrice = customTotal;
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+    renderCart();
+  }
+
+  document.getElementById("customizeModal").style.display = "none";
+}
+
+function adjustCustomizationQty(item, change) {
+  if (!(item in quantities)) return;
+  quantities[item] += change;
+  if (quantities[item] < 0) quantities[item] = 0;
+  document.getElementById(`qty-${item}`).textContent = quantities[item].toString().padStart(2, '0');
+}
+function isNonCustomizable(item) {
+  // List of drink identifiers
+  const drinkKeywords = [
+    'pepsi', 'cola', 'soda', 'drink', 'water', 'juice', 
+    'coffee', 'chai', 'tea', 'beverage', 'coke', 'fanta',
+    'sprite', 'lemonade', 'milkshake', 'smoothie'
+  ];
+  
+  // List of sauce/dip identifiers
+  const sauceKeywords = [
+    'sauce', 'dip', 'mayo', 'ketchup', 'mustard', 'bbq',
+    'ranch', 'garlic', 'schewan', 'piri piri', 'honey',
+    'chilli', 'dressing'
+  ];
+  
+  // Convert item name to lowercase for case-insensitive comparison
+  const itemName = item.name.toLowerCase();
+  
+  // Check if item is a drink or sauce/dip
+  return drinkKeywords.some(keyword => itemName.includes(keyword)) ||
+         sauceKeywords.some(keyword => itemName.includes(keyword)) ||
+         (item.category && item.category.toLowerCase().includes('sauce')) ||
+         (item.category && item.category.toLowerCase().includes('dip'));
+}
+
+function renderCart() {
+  const cartDiv = document.getElementById("cart");
+  const itemCount = document.getElementById("itemCount");
+  cartDiv.innerHTML = "";
+
+  if (cartItems.length === 0) {
+    itemCount.textContent = "Your cart is empty";
+    cartDiv.innerHTML = "<p>No items in your cart.</p>";
+    document.getElementById("subTotal").textContent = "£0.00";
+    document.getElementById("grandTotal").textContent = "£1.50";
+    return;
+  }
+
+  itemCount.textContent = `${cartItems.length} Item(s) Selected`;
+
+  cartItems.forEach((item, index) => {
+    const itemElement = document.createElement("div");
+    itemElement.classList.add("item");
+
+    let customDisplay = '';
+    if (item.customizations) {
+      const names = Object.keys(item.customizations).map(
+        k => `${k} x${item.customizations[k]}`
+      ).join(", ");
+      customDisplay = `<p style="font-size: 12px; color: #aaa;">+ Add-ons: ${names}</p>`;
+    }
+
+    const totalPrice = (item.price * item.quantity) + (item.customPrice || 0);
+    
+    // Only show customize button if it's customizable (not drink or sauce)
+    const showCustomizeButton = !isNonCustomizable(item);
+    
+    itemElement.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <div class="item-info">
+        <h4>${item.name}</h4>
+        <p>${item.calories || ''}</p>
+        ${customDisplay}
+        ${showCustomizeButton ? `<button class="btn" style="width:auto; padding:4px 10px;" onclick="customizeItem(${index})">Customize</button>` : ''}
+      </div>
+      <div>
+        £${totalPrice.toFixed(2)}
+        <div class="qty-controls">
+          <button onclick="updateQty(${index}, -1)">-</button>
+          <span>${item.quantity}</span>
+          <button onclick="updateQty(${index}, 1)">+</button>
+        </div>
+      </div>
+    `;
+    cartDiv.appendChild(itemElement);
+  });
+
+  updateTotals();
+
+}
+
+function updateQty(index, change) {
+  cartItems[index].quantity += change;
+  if (cartItems[index].quantity <= 0) {
+    cartItems.splice(index, 1);
+  }
+  localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  renderCart();
+}
+
+function updateTotals() {
+  // Calculate grand total (items total with customizations)
+  let grandTotal = cartItems.reduce((sum, item) => {
+    const base = item.price * item.quantity;
+    const custom = item.customPrice || 0;
+    return sum + base + custom;
+  }, 0);
+
+  // Calculate discount (if any — here, none)
+  let discount = 0;
+  let discountedGrandTotal = Math.max(grandTotal - discount, 0);
+
+  // Back-calculate subtotal (excluding 20% tax)
+  let subtotal = discountedGrandTotal / 1.20;
+
+  // Calculate taxes as difference
+  let taxes = discountedGrandTotal - subtotal;
+
+  // Update UI
+  document.getElementById("discount").textContent = `-£${discount.toFixed(2)}`;
+  document.getElementById("subTotal").textContent = `£${subtotal.toFixed(2)}`;
+  document.getElementById("taxes").textContent = `£${taxes.toFixed(2)}`;
+  document.getElementById("grandTotal").textContent = `£${discountedGrandTotal.toFixed(2)}`;
+}
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  renderCart();
+
+  document.querySelectorAll(".addon-card .btn").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const card = btn.closest(".addon-card");
+      const name = card.querySelector(".addon-name").textContent;
+      const price = parseFloat(card.querySelector(".addon-price").textContent.slice(1));
+      const img = card.querySelector("img").src;
+
+      const existing = cartItems.find((item) => item.name === name);
+      if (existing) {
+        existing.quantity += 1;
+      } else {
+        cartItems.push({ name, price, image: img, quantity: 1 });
+      }
+      localStorage.setItem("cartItems", JSON.stringify(cartItems));
+      renderCart();
+    });
+  });
+});
+</script>
+</body>
+</html>
