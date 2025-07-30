@@ -203,7 +203,7 @@
           <div class="quantity-controls">
             <button class="quantity-btn" onclick="changeQuantity(-1)">-</button>
             <span class="quantity-display" id="quantity">1</span>
-            <button class="quantity-btn" onclick="changeQuantity(1)">+</button>
+            
           </div>
 
           <button class="add-to-order-btn" onclick="addToOrder()">
@@ -294,7 +294,7 @@
           },
         ],
         "Bombay Street Chaska": [
-          {
+          /*{
             name: "Vada",
             calories: "300 kcal",
             protein: "18g",
@@ -302,6 +302,7 @@
             image: "images/vada1.png",
             category: "Bombay Street Chaska",
           },
+          */
           {
             name: "Vada Pav",
             calories: "300 kcal",
@@ -310,7 +311,7 @@
             image: "images/vadapavHistory.png",
             category: "Bombay Street Chaska",
           },
-          {
+          /*{
             name: "Potato Bhajji",
             calories: "300 kcal",
             protein: "18g",
@@ -318,6 +319,7 @@
             image: "images/potato_bhajji.png",
             category: "Bombay Street Chaska",
           },
+          */
           {
             name: "Potato Bhajji Pav",
             calories: "300 kcal",
@@ -326,7 +328,7 @@
             image: "images/pbja.png",
             category: "Bombay Street Chaska",
           },
-          {
+          /*{
             name: "Onion Bhajji",
             calories: "300 kcal",
             protein: "18g",
@@ -334,12 +336,21 @@
             image: "images/onion_bhajji.png",
             category: "Bombay Street Chaska",
           },
+          */
           {
             name: "Onion Bhajji Pav",
             calories: "300 kcal",
             protein: "18g",
             price: 5.49,
             image: "images/onionbhajipav.png",
+            category: "Bombay Street Chaska",
+          },
+          {
+            name: "Manchurian Pav",
+            calories: "300 kcal",
+            protein: "18g",
+            price: 5.49,
+            image: "",
             category: "Bombay Street Chaska",
           },
         ],
@@ -416,7 +427,7 @@
             sauces: "Honey&Chilly, BBQ, Schezwan, PiriPiri",
             category: "Sides and Fries",
           },
-          {
+         /* {
             name: "Noodle Bhel (R)",
             calories: "300 kcal",
             protein: "18g",
@@ -425,7 +436,8 @@
             sauces: "Honey&Chilly, BBQ, Schezwan, PiriPiri",
             category: "Sides and Fries",
           },
-          {
+          */
+          /*{
             name: "Noodle Bhel (L)",
             calories: "300 kcal",
             protein: "18g",
@@ -434,6 +446,7 @@
             sauces: "Honey&Chilly, BBQ, Schezwan, PiriPiri",
             category: "Sides and Fries",
           },
+          */
           /*{
             name: "Spiral Potato",
             calories: "300 kcal",
@@ -453,7 +466,7 @@
             category: "Sides and Fries",
           },*/
         ],
-        Wraps: [
+        /*Wraps: [
           {
             name: "Chicken Wrap",
             calories: "300 kcal",
@@ -473,7 +486,8 @@
             category: "Wraps",
           },
         ],
-        Burgers: [
+        */
+       /* Burgers: [
           {
             name: "VeggieAloo Tikki Burger",
             calories: "300 kcal",
@@ -499,6 +513,7 @@
             category: "Burgers",
           },
         ],
+        */
         Drinks: [
           {
             name: "Chai",
@@ -508,7 +523,7 @@
             image: "images/Chai-Image-Tulsi.png",
             category: "Drinks",
           },
-          {
+         /* {
             name: "Coffee",
             calories: "300 kcal",
             protein: "18g",
@@ -516,6 +531,7 @@
             image: "images/Coffee-Image.png",
             category: "Drinks",
           },
+          */
           {
             name: "Soda Cans",
             calories: "300 kcal",
@@ -543,7 +559,7 @@
             category: "Drinks",
           },
         ],
-        "Sauces(Dips)": [
+        /*"Sauces(Dips)": [
           {
             name: "Mayo",
             calories: "300 kcal",
@@ -593,7 +609,8 @@
             category: "Sauces(Dips)",
           },
         ],
-        Meals: [
+        */
+       /* Meals: [
           {
             name: "Burger + Classic Fries + Soda Cans",
             calories: "300 kcal",
@@ -649,6 +666,8 @@
             upgrades: "Large:0.69, Cheesy Fries:0.69, Noodle Bhel:1.49",
           },
         ],
+        */
+
       };
 
       // Select container and initialize cart
@@ -1228,6 +1247,7 @@
           closeModal();
         }
       });
+     
     </script>
   </body>
 </html>

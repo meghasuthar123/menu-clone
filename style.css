@@ -786,3 +786,7 @@ body {
   background-color: #ff6600;
   color: #000;
 }
+
+.card .add-btn {
+    display: none;
+}
