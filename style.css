@@ -557,17 +557,16 @@ body {
   gap: 40px;
 }
 
-.nav-links li {
+.nav-links a {
   text-decoration: none;
-  color:#ff5e18;
-  font-weight: 600;
-  font-size: 30px;
+  color: white;
+  font-weight: 500;
+  font-size: 18px;
   position: relative;
   transition: color 0.3s ease;
-  justify-content: center;
 }
 
-.nav-links li::after {
+.nav-links a::after {
   content: "";
   position: absolute;
   width: 0%;
@@ -578,15 +577,15 @@ body {
   transition: width 0.3s ease;
 }
 
-.nav-links li:hover::after {
+.nav-links a:hover::after {
   width: 100%;
 }
 
-.nav-links li.active::after {
+.nav-links a.active::after {
   width: 100%;
 }
 
-.nav-links li:hover {
+.nav-links a:hover {
   color: #ffffff;
 }
 
@@ -597,18 +596,13 @@ body {
 }
 
 .profile-container {
-  background-color: transparent;
+  background-color: white;
   padding: 6px 12px;
   border-radius: 999px;
   display: flex;
   justify-content: center;
   align-items: center;
 }
-
-.profile-icon {
-  display: none;
-}
-
 
 .footer {
   background: linear-gradient(to top, #ff6b00, #ff6a0072, #191917);
@@ -785,8 +779,4 @@ body {
 .dropdown-menu li a:hover {
   background-color: #ff6600;
   color: #000;
-}
-
-.card .add-btn {
-    display: none;
 }
